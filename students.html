@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>KJIT Campus | Students</title>
+
+    <link rel="stylesheet"
+        href="style.css">
+
+</head>
+
+<body>
+
+<div class="app">
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                🎓
+            </div>
+
+            <div>
+                <h2>KJIT</h2>
+                <span>Campus ERP</span>
+            </div>
+
+        </div>
+
+
+        <nav class="menu">
+
+            <button
+                class="menu-item"
+                onclick="location.href='index.html'">
+
+                <span>🏠</span>
+                <span>Dashboard</span>
+
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="location.href='index.html'">
+
+                <span>📋</span>
+                <span>Attendance</span>
+
+            </button>
+
+
+            <button
+                class="menu-item active">
+
+                <span>👨‍🎓</span>
+                <span>Students</span>
+
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="location.href='report.html'">
+
+                <span>📊</span>
+                <span>Reports</span>
+
+            </button>
+
+
+            <button
+                class="menu-item">
+
+                <span>📚</span>
+                <span>Subjects</span>
+
+            </button>
+
+
+            <div class="quick-title">
+                Quick Actions
+            </div>
+
+
+            <button
+                class="menu-item"
+                onclick="openStudentForm()">
+
+                <span>➕</span>
+                <span>Add Student</span>
+
+            </button>
+
+
+            <button
+                class="menu-item"
+                onclick="exportStudents()">
+
+                <span>📥</span>
+                <span>Export Students</span>
+
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <button
+                class="menu-item"
+                onclick="location.href='index.html'">
+
+                <span>⚙️</span>
+                <span>Settings</span>
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <main class="main">
+
+
+        <!-- HEADER -->
+
+        <header class="header">
+
+            <div>
+
+                <h1>
+                    Student Management
+                </h1>
+
+                <p>
+                    Add and manage your college students.
+                </p>
+
+            </div>
+
+
+            <div class="header-right">
+
+                <button
+                    class="theme-btn"
+                    id="themeButton">
+
+                    🌙
+
+                </button>
+
+
+                <div class="profile">
+
+                    <div class="avatar">
+                        A
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Admin
+                        </strong>
+
+                        <small>
+                            Student Manager
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- PAGE TITLE -->
+
+        <section class="page-heading">
+
+            <div>
+
+                <h2>
+                    👨‍🎓 STUDENT DIRECTORY
+                </h2>
+
+                <p>
+                    Manage student names,
+                    roll numbers and details.
+                </p>
+
+            </div>
+
+
+            <div class="college-badge">
+                🎓 KJIT CAMPUS
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             STATISTICS
+        ========================================== -->
+
+        <section class="stats">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon blue">
+                    👨‍🎓
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Students
+                    </span>
+
+                    <h3 id="studentCount">
+                        20
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    ✓
+                </div>
+
+                <div>
+
+                    <span>
+                        Active Students
+                    </span>
+
+                    <h3 id="activeCount">
+                        20
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+                    🎓
+                </div>
+
+                <div>
+
+                    <span>
+                        Semester
+                    </span>
+
+                    <h3>
+                        1
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon orange">
+                    💻
+                </div>
+
+                <div>
+
+                    <span>
+                        Department
+                    </span>
+
+                    <h3>
+                        CE
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             SEARCH + ACTION
+        ========================================== -->
+
+        <section class="filters">
+
+
+            <div class="filter">
+
+                <label>
+                    🔍 SEARCH STUDENT
+                </label>
+
+                <div class="search">
+
+                    <span>🔍</span>
+
+                    <input
+                        type="text"
+                        id="studentSearch"
+                        placeholder="Search by name or roll number...">
+
+                </div>
+
+            </div>
+
+
+            <div class="filter">
+
+                <label>
+                    🎓 SEMESTER
+                </label>
+
+                <select id="studentSemester">
+
+                    <option>
+                        Semester 1
+                    </option>
+
+                    <option>
+                        Semester 2
+                    </option>
+
+                    <option>
+                        Semester 3
+                    </option>
+
+                    <option>
+                        Semester 4
+                    </option>
+
+                    <option>
+                        Semester 5
+                    </option>
+
+                    <option>
+                        Semester 6
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter">
+
+                <label>
+                    🏫 DEPARTMENT
+                </label>
+
+                <select>
+
+                    <option>
+                        Computer Engineering
+                    </option>
+
+                    <option>
+                        Information Technology
+                    </option>
+
+                    <option>
+                        Mechanical Engineering
+                    </option>
+
+                    <option>
+                        Electrical Engineering
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter">
+
+                <label>
+                    ACTION
+                </label>
+
+                <button
+                    class="btn save"
+                    onclick="openStudentForm()">
+
+                    ➕ Add Student
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             STUDENT TABLE
+        ========================================== -->
+
+        <section class="attendance-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        👨‍🎓 Student List
+                    </h2>
+
+                    <p>
+                        Manage your registered students.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="btn excel"
+                    onclick="exportStudents()">
+
+                    📥 Export
+
+                </button>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                #
+                            </th>
+
+                            <th>
+                                Roll Number
+                            </th>
+
+                            <th>
+                                Student Name
+                            </th>
+
+                            <th>
+                                Department
+                            </th>
+
+                            <th>
+                                Semester
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="studentTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================================
+             ADD / EDIT STUDENT MODAL
+        ========================================== -->
+
+        <div
+            class="modal"
+            id="studentModal">
+
+            <div class="modal-content">
+
+
+                <div class="modal-header">
+
+                    <div>
+
+                        <h2 id="modalTitle">
+                            ➕ Add Student
+                        </h2>
+
+                        <p>
+                            Enter student information.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="close-btn"
+                        onclick="closeStudentForm()">
+
+                        ✕
+
+                    </button>
+
+                </div>
+
+
+
+                <form
+                    id="studentForm">
+
+
+                    <input
+                        type="hidden"
+                        id="editIndex">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Roll Number
+                        </label>
+
+                        <input
+                            type="number"
+                            id="rollNumber"
+                            required
+                            min="1"
+                            placeholder="Enter roll number">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Student Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="studentName"
+                            required
+                            placeholder="Enter student name">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Department
+                        </label>
+
+                        <select
+                            id="studentDepartment">
+
+                            <option>
+                                Computer Engineering
+                            </option>
+
+                            <option>
+                                Information Technology
+                            </option>
+
+                            <option>
+                                Mechanical Engineering
+                            </option>
+
+                            <option>
+                                Electrical Engineering
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Semester
+                        </label>
+
+                        <select
+                            id="formSemester">
+
+                            <option>
+                                Semester 1
+                            </option>
+
+                            <option>
+                                Semester 2
+                            </option>
+
+                            <option>
+                                Semester 3
+                            </option>
+
+                            <option>
+                                Semester 4
+                            </option>
+
+                            <option>
+                                Semester 5
+                            </option>
+
+                            <option>
+                                Semester 6
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            type="button"
+                            class="btn reset"
+                            onclick="closeStudentForm()">
+
+                            Cancel
+
+                        </button>
+
+
+                        <button
+                            type="submit"
+                            class="btn save">
+
+                            💾 Save Student
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            <span>
+                © 2026 KJIT Campus
+            </span>
+
+            <span>
+                Student Management System
+            </span>
+
+            <span>
+                Version 1.0
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+
+<!-- =========================================
+     JAVASCRIPT
+========================================== -->
+
+<script>
+
+
+// =================================================
+// DEFAULT STUDENTS
+// =================================================
+
+const defaultStudents = [
+
+    {
+        roll: 1,
+        name: "Aditya Mali",
+        department: "Computer Engineering",
+        semester: "Semester 1",
+        active: true
+    },
+
+    {
+        roll: 2,
+        name: "Student 2",
+        department: "Computer Engineering",
+        semester: "Semester 1",
+        active: true
+    },
+
+    {
+        roll: 3,
+        name: "Student 3",
+        department: "Computer Engineering",
+        semester: "Semester 1",
+        active: true
+    },
+
+    {
+        roll: 4,
+        name: "Student 4",
+        department: "Computer Engineering",
+        semester: "Semester 1",
+        active: true
+    },
+
+    {
+        roll: 5,
+        name: "Student 5",
+        department: "Computer Engineering",
+        semester: "Semester 1",
+        active: true
+    },
+
+    {
+        roll: 6,
+        name: "Student 6",
+        department: "Computer Engineering",
+        semester: "Semester 1",
+        active: true
+    },
+
+    {
+        roll: 7,
+        name: "Student 7",
+        department: "Computer Engineering",
+        semester: "Semester 1",
+        active: true
+    },
+
+    {
+        roll: 8,
+        name: "Student 8",
+        department: "Computer Engineering",
+        semester: "Semester 1",
+        active: true
+    },
+
+    {
+        roll: 9,
+        name: "Student 9",
+        department: "Computer Engineering",
+        semester: "Semester 1",
+        active: true
+    },
+
+    {
+        roll: 10,
+        name: "Student 10",
+        department: "Computer Engineering",
+        semester: "Semester 1",
+        active: true
+    },
+
+    {
+        roll: 11,
+        name: "Student 11",
+        department: "Computer Engineering",
+        semester: "Semester 1",
+        active: true
+    },
+
+    {
+        roll: 12,
+        name: "Student 12",
+        department: "Computer Engineering",
+        semester: "Semester 1",
+        active: true
+    },
+
+    {
+        roll: 13,
+        name: "Student 13",
+        department: "Computer Engineering",
+        semester: "Semester 1",
+        active: true
+    },
+
+    {
+        roll: 14,
+        name: "Student 14",
+        department: "Computer Engineering",
+        semester: "Semester 1",
+        active: true
+    },
+
+    {
+        roll: 15,
+        name: "Student 15",
+        department: "Computer Engineering",
+        semester: "Semester 1",
+        active: true
+    },
+
+    {
+        roll: 16,
+        name: "Student 16",
+        department: "Computer Engineering",
+        semester: "Semester 1",
+        active: true
+    },
+
+    {
+        roll: 17,
+        name: "Student 17",
+        department: "Computer Engineering",
+        semester: "Semester 1",
+        active: true
+    },
+
+    {
+        roll: 18,
+        name: "Student 18",
+        department: "Computer Engineering",
+        semester: "Semester 1",
+        active: true
+    },
+
+    {
+        roll: 19,
+        name: "Student 19",
+        department: "Computer Engineering",
+        semester: "Semester 1",
+        active: true
+    },
+
+    {
+        roll: 20,
+        name: "Student 20",
+        department: "Computer Engineering",
+        semester: "Semester 1",
+        active: true
+    }
+
+];
+
+
+// =================================================
+// LOAD STUDENTS
+// =================================================
+
+let students =
+    JSON.parse(
+        localStorage.getItem(
+            "kjitStudents"
+        )
+    );
+
+
+if (!students) {
+
+    students =
+        defaultStudents;
+
+    saveStudents();
+
+}
+
+
+// =================================================
+// SAVE STUDENTS
+// =================================================
+
+function saveStudents() {
+
+    localStorage.setItem(
+        "kjitStudents",
+        JSON.stringify(
+            students
+        )
+    );
+
+}
+
+
+// =================================================
+// DISPLAY STUDENTS
+// =================================================
+
+function displayStudents() {
+
+    const table =
+        document.getElementById(
+            "studentTable"
+        );
+
+
+    const search =
+        document.getElementById(
+            "studentSearch"
+        ).value
+            .toLowerCase()
+            .trim();
+
+
+    table.innerHTML = "";
+
+
+    students.forEach(
+        (student, index) => {
+
+
+            if (
+                search &&
+                !student.name
+                    .toLowerCase()
+                    .includes(search) &&
+                !student.roll
+                    .toString()
+                    .includes(search)
+            ) {
+
+                return;
+
+            }
+
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                <td>
+                    ${student.roll}
+                </td>
+
+                <td class="student-name">
+                    ${student.name}
+                </td>
+
+                <td>
+                    ${student.department}
+                </td>
+
+                <td>
+                    ${student.semester}
+                </td>
+
+                <td>
+
+                    <span class="status ${
+                        student.active
+                            ? "good"
+                            : "danger"
+                    }">
+
+                        ${
+                            student.active
+                                ? "Active"
+                                : "Inactive"
+                        }
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <button
+                        class="table-action edit"
+                        onclick="editStudent(${index})">
+
+                        ✏️
+
+                    </button>
+
+
+                    <button
+                        class="table-action delete"
+                        onclick="deleteStudent(${index})">
+
+                        🗑️
+
+                    </button>
+
+                </td>
+
+            `;
+
+
+            table.appendChild(row);
+
+        }
+    );
+
+
+    updateStudentStats();
+
+}
+
+
+// =================================================
+// UPDATE STATISTICS
+// =================================================
+
+function updateStudentStats() {
+
+    const active =
+        students.filter(
+            student =>
+                student.active
+        ).length;
+
+
+    document.getElementById(
+        "studentCount"
+    ).textContent =
+        students.length;
+
+
+    document.getElementById(
+        "activeCount"
+    ).textContent =
+        active;
+
+}
+
+
+// =================================================
+// OPEN FORM
+// =================================================
+
+function openStudentForm() {
+
+    document.getElementById(
+        "studentModal"
+    ).classList.add(
+        "show"
+    );
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "➕ Add Student";
+
+
+    document.getElementById(
+        "studentForm"
+    ).reset();
+
+
+    document.getElementById(
+        "editIndex"
+    ).value = "";
+
+}
+
+
+// =================================================
+// CLOSE FORM
+// =================================================
+
+function closeStudentForm() {
+
+    document.getElementById(
+        "studentModal"
+    ).classList.remove(
+        "show"
+    );
+
+}
+
+
+// =================================================
+// EDIT STUDENT
+// =================================================
+
+function editStudent(index) {
+
+    const student =
+        students[index];
+
+
+    document.getElementById(
+        "studentModal"
+    ).classList.add(
+        "show"
+    );
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "✏️ Edit Student";
+
+
+    document.getElementById(
+        "editIndex"
+    ).value =
+        index;
+
+
+    document.getElementById(
+        "rollNumber"
+    ).value =
+        student.roll;
+
+
+    document.getElementById(
+        "studentName"
+    ).value =
+        student.name;
+
+
+    document.getElementById(
+        "studentDepartment"
+    ).value =
+        student.department;
+
+
+    document.getElementById(
+        "formSemester"
+    ).value =
+        student.semester;
+
+}
+
+
+// =================================================
+// ADD / UPDATE STUDENT
+// =================================================
+
+document.getElementById(
+    "studentForm"
+).addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        const roll =
+            Number(
+                document.getElementById(
+                    "rollNumber"
+                ).value
+            );
+
+
+        const name =
+            document.getElementById(
+                "studentName"
+            ).value.trim();
+
+
+        const department =
+            document.getElementById(
+                "studentDepartment"
+            ).value;
+
+
+        const semester =
+            document.getElementById(
+                "formSemester"
+            ).value;
+
+
+        const editIndex =
+            document.getElementById(
+                "editIndex"
+            ).value;
+
+
+        if (!name) {
+
+            alert(
+                "Please enter student name."
+            );
+
+            return;
+
+        }
+
+
+        // EDIT
+
+        if (editIndex !== "") {
+
+            students[
+                Number(editIndex)
+            ] = {
+
+                roll,
+
+                name,
+
+                department,
+
+                semester,
+
+                active: true
+
+            };
+
+        }
+
+        // ADD
+
+        else {
+
+            const exists =
+                students.some(
+                    student =>
+                        student.roll === roll
+                );
+
+
+            if (exists) {
+
+                alert(
+                    "This roll number already exists."
+                );
+
+                return;
+
+            }
+
+
+            students.push({
+
+                roll,
+
+                name,
+
+                department,
+
+                semester,
+
+                active: true
+
+            });
+
+        }
+
+
+        saveStudents();
+
+        displayStudents();
+
+        closeStudentForm();
+
+
+        alert(
+            "✅ Student saved successfully!"
+        );
+
+    }
+);
+
+
+// =================================================
+// DELETE STUDENT
+// =================================================
+
+function deleteStudent(index) {
+
+    const student =
+        students[index];
+
+
+    const confirmation =
+        confirm(
+            `Delete ${student.name}?`
+        );
+
+
+    if (!confirmation) {
+        return;
+    }
+
+
+    students.splice(
+        index,
+        1
+    );
+
+
+    saveStudents();
+
+    displayStudents();
+
+
+    alert(
+        "🗑️ Student deleted."
+    );
+
+}
+
+
+// =================================================
+// SEARCH
+// =================================================
+
+document.getElementById(
+    "studentSearch"
+).addEventListener(
+    "input",
+    displayStudents
+);
+
+
+// =================================================
+// EXPORT STUDENTS
+// =================================================
+
+function exportStudents() {
+
+    let csv =
+        "Roll Number,Student Name,Department,Semester,Status\n";
+
+
+    students.forEach(
+        student => {
+
+            csv +=
+                student.roll +
+                "," +
+                '"' +
+                student.name +
+                '"' +
+                "," +
+                '"' +
+                student.department +
+                '"' +
+                "," +
+                student.semester +
+                "," +
+                (
+                    student.active
+                        ? "Active"
+                        : "Inactive"
+                ) +
+                "\n";
+
+        }
+    );
+
+
+    const blob =
+        new Blob(
+            [csv],
+            {
+                type:
+                    "text/csv;charset=utf-8;"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(
+            blob
+        );
+
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    link.href =
+        url;
+
+    link.download =
+        "KJIT_Students.csv";
+
+
+    link.click();
+
+
+    URL.revokeObjectURL(
+        url
+    );
+
+}
+
+
+// =================================================
+// DARK MODE
+// =================================================
+
+const themeButton =
+    document.getElementById(
+        "themeButton"
+    );
+
+
+themeButton.addEventListener(
+    "click",
+    function() {
+
+        document.body.classList.toggle(
+            "dark"
+        );
+
+
+        if (
+            document.body.classList.contains(
+                "dark"
+            )
+        ) {
+
+            themeButton.textContent =
+                "☀️";
+
+            localStorage.setItem(
+                "theme",
+                "dark"
+            );
+
+        }
+
+        else {
+
+            themeButton.textContent =
+                "🌙";
+
+            localStorage.setItem(
+                "theme",
+                "light"
+            );
+
+        }
+
+    }
+);
+
+
+if (
+    localStorage.getItem(
+        "theme"
+    ) === "dark"
+) {
+
+    document.body.classList.add(
+        "dark"
+    );
+
+    themeButton.textContent =
+        "☀️";
+
+}
+
+
+// =================================================
+// START
+// =================================================
+
+displayStudents();
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,1161 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>KJIT Campus - Login</title>
+
+    <style>
+
+        /* =========================================
+           RESET
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* =========================================
+           BODY
+        ========================================= */
+
+        body {
+
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(59, 130, 246, 0.35),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(168, 85, 247, 0.35),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #0f172a,
+                    #312e81,
+                    #7e22ce
+                );
+
+        }
+
+
+        /* =========================================
+           MAIN LOGIN CONTAINER
+        ========================================= */
+
+        .login-wrapper {
+
+            width: 100%;
+
+            max-width: 1050px;
+
+            min-height: 650px;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            overflow: hidden;
+
+            border-radius: 28px;
+
+            background:
+                rgba(255, 255, 255, 0.12);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.20);
+
+            box-shadow:
+                0 30px 80px
+                rgba(0, 0, 0, 0.35);
+
+            backdrop-filter:
+                blur(18px);
+
+        }
+
+
+        /* =========================================
+           LEFT SIDE
+        ========================================= */
+
+        .login-left {
+
+            position: relative;
+
+            padding: 55px;
+
+            color: white;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            overflow: hidden;
+
+        }
+
+
+        .login-left::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 280px;
+
+            height: 280px;
+
+            border-radius: 50%;
+
+            top: -100px;
+
+            left: -100px;
+
+            background:
+                rgba(255, 255, 255, 0.08);
+
+        }
+
+
+        .login-left::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 360px;
+
+            height: 360px;
+
+            border-radius: 50%;
+
+            right: -180px;
+
+            bottom: -180px;
+
+            background:
+                rgba(255, 255, 255, 0.08);
+
+        }
+
+
+        /* =========================================
+           LOGO
+        ========================================= */
+
+        .brand {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 55px;
+
+        }
+
+
+        .brand-logo {
+
+            width: 65px;
+
+            height: 65px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 18px;
+
+            font-size: 34px;
+
+            background:
+                rgba(255, 255, 255, 0.18);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.25);
+
+        }
+
+
+        .brand h1 {
+
+            font-size: 27px;
+
+            letter-spacing: 1px;
+
+        }
+
+
+        .brand span {
+
+            display: block;
+
+            margin-top: 4px;
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            opacity: 0.8;
+
+        }
+
+
+        /* =========================================
+           WELCOME TEXT
+        ========================================= */
+
+        .welcome {
+
+            position: relative;
+
+            z-index: 2;
+
+        }
+
+
+        .welcome .small-title {
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            opacity: 0.8;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .welcome h2 {
+
+            font-size: 45px;
+
+            line-height: 1.1;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .welcome p {
+
+            max-width: 450px;
+
+            font-size: 15px;
+
+            line-height: 1.7;
+
+            opacity: 0.82;
+
+        }
+
+
+        /* =========================================
+           FEATURES
+        ========================================= */
+
+        .features {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 12px;
+
+            margin-top: 35px;
+
+        }
+
+
+        .feature {
+
+            padding: 14px;
+
+            border-radius: 14px;
+
+            background:
+                rgba(255, 255, 255, 0.10);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.12);
+
+            font-size: 13px;
+
+        }
+
+
+        .feature strong {
+
+            display: block;
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .feature span {
+
+            opacity: 0.7;
+
+        }
+
+
+        /* =========================================
+           RIGHT SIDE
+        ========================================= */
+
+        .login-right {
+
+            background: #ffffff;
+
+            padding: 55px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+        .login-card {
+
+            width: 100%;
+
+            max-width: 410px;
+
+        }
+
+
+        /* =========================================
+           LOGIN HEADER
+        ========================================= */
+
+        .login-card-header {
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .login-card-header h2 {
+
+            color: #111827;
+
+            font-size: 30px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .login-card-header p {
+
+            color: #64748b;
+
+            font-size: 14px;
+
+        }
+
+
+        /* =========================================
+           FORM
+        ========================================= */
+
+        .form-group {
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            color: #334155;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .input-wrapper {
+
+            position: relative;
+
+        }
+
+
+        .input-icon {
+
+            position: absolute;
+
+            left: 14px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            font-size: 18px;
+
+            pointer-events: none;
+
+        }
+
+
+        .form-input {
+
+            width: 100%;
+
+            height: 52px;
+
+            border:
+                1px solid
+                #cbd5e1;
+
+            border-radius: 12px;
+
+            padding:
+                0 45px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            background: #f8fafc;
+
+            transition: 0.2s;
+
+        }
+
+
+        .form-input:focus {
+
+            background: white;
+
+            border-color:
+                #6366f1;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(99, 102, 241, 0.12);
+
+        }
+
+
+        /* =========================================
+           PASSWORD BUTTON
+        ========================================= */
+
+        .show-password {
+
+            position: absolute;
+
+            right: 12px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            font-size: 18px;
+
+            padding: 5px;
+
+        }
+
+
+        /* =========================================
+           REMEMBER ME
+        ========================================= */
+
+        .login-options {
+
+            margin-bottom: 22px;
+
+            font-size: 13px;
+
+        }
+
+
+        .remember {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: #64748b;
+
+            cursor: pointer;
+
+        }
+
+
+        .remember input {
+
+            accent-color:
+                #6366f1;
+
+        }
+
+
+        /* =========================================
+           LOGIN BUTTON
+        ========================================= */
+
+        .login-button {
+
+            width: 100%;
+
+            height: 54px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4f46e5,
+                    #9333ea
+                );
+
+            box-shadow:
+                0 10px 25px
+                rgba(99, 102, 241, 0.30);
+
+            transition: 0.2s;
+
+        }
+
+
+        .login-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 14px 30px
+                rgba(99, 102, 241, 0.38);
+
+        }
+
+
+        .login-button:active {
+
+            transform:
+                translateY(0);
+
+        }
+
+
+        .login-button:disabled {
+
+            opacity: 0.7;
+
+            cursor: not-allowed;
+
+        }
+
+
+        /* =========================================
+           MESSAGES
+        ========================================= */
+
+        .message {
+
+            display: none;
+
+            padding: 12px 14px;
+
+            border-radius: 10px;
+
+            margin-bottom: 18px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+        }
+
+
+        .error {
+
+            color: #991b1b;
+
+            background: #fee2e2;
+
+            border:
+                1px solid
+                #fecaca;
+
+        }
+
+
+        .success {
+
+            color: #166534;
+
+            background: #dcfce7;
+
+            border:
+                1px solid
+                #bbf7d0;
+
+        }
+
+
+        /* =========================================
+           DEMO LOGIN
+        ========================================= */
+
+        .demo-box {
+
+            margin-top: 24px;
+
+            padding: 13px;
+
+            border-radius: 11px;
+
+            background: #f1f5f9;
+
+            color: #475569;
+
+            font-size: 12px;
+
+            text-align: center;
+
+        }
+
+
+        .demo-box strong {
+
+            color: #312e81;
+
+        }
+
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        .footer {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #94a3b8;
+
+            font-size: 11px;
+
+        }
+
+
+        /* =========================================
+           TABLET
+        ========================================= */
+
+        @media (max-width: 800px) {
+
+            body {
+
+                padding: 12px;
+
+            }
+
+
+            .login-wrapper {
+
+                grid-template-columns: 1fr;
+
+                max-width: 520px;
+
+                min-height: auto;
+
+            }
+
+
+            .login-left {
+
+                padding: 35px 28px;
+
+            }
+
+
+            .brand {
+
+                margin-bottom: 35px;
+
+            }
+
+
+            .welcome h2 {
+
+                font-size: 34px;
+
+            }
+
+
+            .login-right {
+
+                padding: 35px 28px;
+
+            }
+
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 430px) {
+
+            body {
+
+                padding: 10px;
+
+            }
+
+
+            .login-left {
+
+                padding: 28px 20px;
+
+            }
+
+
+            .login-right {
+
+                padding: 30px 20px;
+
+            }
+
+
+            .features {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .brand h1 {
+
+                font-size: 22px;
+
+            }
+
+
+            .welcome h2 {
+
+                font-size: 30px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         LOGIN WRAPPER
+    ========================================== -->
+
+    <div class="login-wrapper">
+
+
+        <!-- =====================================
+             LEFT SIDE
+        ====================================== -->
+
+        <section class="login-left">
+
+
+            <!-- BRAND -->
+
+            <div class="brand">
+
+                <div class="brand-logo">
+                    🎓
+                </div>
+
+                <div>
+
+                    <h1>
+                        KJIT CAMPUS
+                    </h1>
+
+                    <span>
+                        ATTENDANCE SYSTEM
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- WELCOME -->
+
+            <div class="welcome">
+
+                <div class="small-title">
+                    COLLEGE MANAGEMENT
+                </div>
+
+                <h2>
+                    Welcome Back!
+                </h2>
+
+                <p>
+                    Manage your daily college attendance
+                    quickly and easily. Track students,
+                    attendance and reports from one
+                    simple dashboard.
+                </p>
+
+            </div>
+
+
+            <!-- FEATURES -->
+
+            <div class="features">
+
+
+                <div class="feature">
+
+                    <strong>
+                        📋 Daily Attendance
+                    </strong>
+
+                    <span>
+                        Record attendance easily.
+                    </span>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <strong>
+                        👨‍🎓 Students
+                    </strong>
+
+                    <span>
+                        Manage your student list.
+                    </span>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <strong>
+                        📊 Reports
+                    </strong>
+
+                    <span>
+                        View attendance statistics.
+                    </span>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <strong>
+                        💾 Local Storage
+                    </strong>
+
+                    <span>
+                        Save data in your browser.
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             RIGHT SIDE
+        ====================================== -->
+
+        <section class="login-right">
+
+
+            <div class="login-card">
+
+
+                <!-- HEADER -->
+
+                <div class="login-card-header">
+
+                    <h2>
+                        Sign In
+                    </h2>
+
+                    <p>
+                        Enter your administrator account
+                        to continue.
+                    </p>
+
+                </div>
+
+
+                <!-- ERROR -->
+
+                <div
+                    id="errorMessage"
+                    class="message error">
+                </div>
+
+
+                <!-- SUCCESS -->
+
+                <div
+                    id="successMessage"
+                    class="message success">
+                </div>
+
+
+                <!-- LOGIN FORM -->
+
+                <form id="loginForm">
+
+
+                    <!-- USERNAME -->
+
+                    <div class="form-group">
+
+                        <label for="username">
+                            Username
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                👤
+                            </span>
+
+
+                            <input
+                                type="text"
+                                id="username"
+                                class="form-input"
+                                placeholder="Enter username"
+                                autocomplete="username"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                🔒
+                            </span>
+
+
+                            <input
+                                type="password"
+                                id="password"
+                                class="form-input"
+                                placeholder="Enter password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+
+                            <button
+                                type="button"
+                                class="show-password"
+                                id="showPassword"
+                                aria-label="Show password">
+
+                                👁️
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- REMEMBER -->
+
+                    <div class="login-options">
+
+                        <label class="remember">
+
+                            <input
+                                type="checkbox"
+                                id="rememberMe"
+                            >
+
+                            Remember me
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- LOGIN BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="login-button"
+                        id="loginButton">
+
+                        🔐 Login to Dashboard
+
+                    </button>
+
+
+                </form>
+
+
+                <!-- DEMO ACCOUNT -->
+
+                <div class="demo-box">
+
+                    Demo Login:
+
+                    <strong>
+                        admin
+                    </strong>
+
+                    /
+
+                    <strong>
+                        1234
+                    </strong>
+
+                </div>
+
+
+                <!-- FOOTER -->
+
+                <div class="footer">
+
+                    © 2026 KJIT Campus
+                    • Attendance Management System
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+    </div>
+
+
+    <!-- =========================================
+         LOGIN JAVASCRIPT
+    ========================================== -->
+
+    <script src="login.js"></script>
+
+
+</body>
+
+</html>
+```

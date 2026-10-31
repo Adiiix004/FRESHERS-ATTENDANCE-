@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KJIT Campus - Attendance System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+    <div class="sidebar-logo">
+        <div class="logo-icon">🎓</div>
+
+        <div>
+            <h2>KJIT</h2>
+            <span>CAMPUS</span>
+        </div>
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <a href="index.html" class="nav-item">
+            <span>🏠</span>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="index.html" class="nav-item">
+            <span>📋</span>
+            <span>Attendance</span>
+        </a>
+
+        <a href="students.html" class="nav-item">
+            <span>👨‍🎓</span>
+            <span>Students</span>
+        </a>
+
+        <a href="report.html" class="nav-item">
+            <span>📊</span>
+            <span>Reports</span>
+        </a>
+
+        <div class="nav-section-title">
+            MANAGEMENT
+        </div>
+
+        <a href="C:\Users\Admin\OneDrive\Desktop\Daily-Attendance-App\students.html" class="nav-item">
+            <span>⚡</span>
+            <span>Quick Actions</span>
+        </a>
+
+        <a href="#" class="nav-item" onclick="openSettings(event)">
+            <span>⚙️</span>
+            <span>Settings</span>
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="admin-card">
+
+            <div class="admin-avatar">
+                A
+            </div>
+
+            <div>
+                <strong>Admin</strong>
+                <small>Administrator</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- HEADER -->
+        <header class="topbar">
+
+    <div class="mobile-menu" onclick="toggleSidebar()">
+        ☰
+    </div>
+
+    <div class="page-brand">
+        <span>Attendance</span>
+    </div>
+
+
+    <div class="topbar-actions">
+
+        <button
+            id="themeButton"
+            class="icon-button"
+            title="Toggle Dark Mode"
+        >
+            🌙
+        </button>
+
+        <div class="profile">
+
+            <div class="profile-avatar">
+                A
+            </div>
+
+            <div class="profile-info">
+                <strong>Admin</strong>
+                <small>College Admin</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+        <!-- PAGE TITLE -->
+        <section class="page-heading">
+
+            <div>
+                <h2>DAILY ATTENDANCE</h2>
+                <p id="todayText"></p>
+            </div>
+
+            <div class="college-badge">
+                🎓 KJIT CAMPUS
+            </div>
+
+        </section>
+
+
+        <!-- STAT CARDS -->
+        <section class="stats">
+
+            <div class="stat-card">
+
+                <div class="stat-icon blue">
+                    👨‍🎓
+                </div>
+
+                <div>
+                    <span>Students</span>
+                    <h3 id="totalStudents">20</h3>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    ✓
+                </div>
+
+                <div>
+                    <span>Present</span>
+                    <h3 id="totalPresent">0</h3>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon red">
+                    ✕
+                </div>
+
+                <div>
+                    <span>Absent</span>
+                    <h3 id="totalAbsent">0</h3>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+                    %
+                </div>
+
+                <div>
+                    <span>Attendance</span>
+                    <h3 id="attendancePercentage">0%</h3>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon orange">
+                    ⚠
+                </div>
+
+                <div>
+                    <span>Below 75%</span>
+                    <h3 id="below75">0</h3>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FILTERS -->
+        <section class="filters">
+
+            <div class="filter">
+
+                <label>📅 Date</label>
+
+                <input
+                    type="date"
+                    id="date">
+
+            </div>
+
+
+            <div class="filter">
+
+                <label>📚 Semester</label>
+
+                <select id="semester">
+
+                    <option>Semester 1</option>
+                    <option>Semester 2</option>
+                    <option selected>Semester 3</option>
+                    <option>Semester 4</option>
+                    <option>Semester 5</option>
+                    <option>Semester 6</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter">
+
+                <label>🏫 Division</label>
+
+                <select id="division">
+
+                    <option>Division A</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filter search-filter">
+
+                <label>🔍 Search Student</label>
+
+                <div class="search">
+
+                    <span>🔍</span>
+
+                    <input
+                        type="text"
+                        id="search"
+                        placeholder="Name or roll number">
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ATTENDANCE TABLE CARD -->
+        <section class="attendance-card">
+
+            <div class="card-header">
+
+                <div>
+                    <h2>Attendance Records</h2>
+                    <p>Click a period button to mark attendance</p>
+                </div>
+
+                <div class="legend">
+
+                    <span>
+                        <i class="dot green-dot"></i>
+                        Present
+                    </span>
+
+                    <span>
+                        <i class="dot red-dot"></i>
+                        Absent
+                    </span>
+
+                    <span>
+                        <i class="dot gray-dot"></i>
+                        Not Marked
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>#</th>
+                            <th class="student-column">Student</th>
+
+                            <th>P1</th>
+                            <th>P2</th>
+                            <th>P3</th>
+                            <th>P4</th>
+                            <th>P5</th>
+                            <th>P6</th>
+
+                            <th>Present</th>
+                            <th>Absent</th>
+                            <th>Attendance</th>
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="attendanceBody"></tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+            <div class="actions">
+
+                <button
+                    class="btn save"
+                    id="saveBtn">
+                    💾 Save Attendance
+                </button>
+
+                <button
+                    class="btn excel"
+                    id="exportBtn">
+                    📊 Excel
+                </button>
+
+                <button
+                    class="btn pdf"
+                    id="pdfBtn">
+                    📄 PDF
+                </button>
+
+                <button
+                    class="btn print"
+                    onclick="window.print()">
+                    🖨 Print
+                </button>
+
+                <button
+                    class="btn reset"
+                    id="resetBtn">
+                    ↻ Reset
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer>
+
+            <span>
+                © 2026 KJIT Campus
+            </span>
+
+            <span>
+                Daily Attendance Management System
+            </span>
+
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
