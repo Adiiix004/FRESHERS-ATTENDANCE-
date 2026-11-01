@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="auth.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KJIT Campus - Settings</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ---------- Settings page only ---------- */
+
+        .settings-wrap {
+            max-width: 860px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+        }
+
+        .settings-tabs {
+            display: flex;
+            gap: 10px;
+            margin: 6px 0 22px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .settings-tab {
+            flex: 0 0 auto;
+            border: 1px solid #dbe1ff;
+            background: #ffffff;
+            color: #4338ca;
+            padding: 10px 18px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .settings-tab:hover { background: #eef2ff; }
+
+        .settings-tab.active {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            border-color: transparent;
+            color: #ffffff;
+            box-shadow: 0 6px 16px rgba(79, 70, 229, 0.28);
+        }
+
+        .settings-panel { display: none; }
+        .settings-panel.active { display: block; }
+
+        .settings-card {
+            background: #ffffff;
+            border: 1px solid #e5e9f5;
+            border-radius: 18px;
+            padding: 22px;
+            margin-bottom: 18px;
+            box-shadow: 0 6px 20px rgba(30, 41, 90, 0.06);
+        }
+
+        .settings-card h3 {
+            font-size: 17px;
+            margin-bottom: 4px;
+            color: #172033;
+        }
+
+        .settings-card .hint {
+            font-size: 13.5px;
+            color: #64748b;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .settings-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .settings-row strong { display: block; font-size: 15px; color: #172033; }
+        .settings-row small { color: #64748b; font-size: 13px; }
+
+        /* toggle switch */
+        .switch { position: relative; width: 52px; height: 30px; flex: 0 0 auto; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; inset: 0; cursor: pointer;
+            background: #cbd5e1; border-radius: 999px; transition: 0.25s;
+        }
+        .slider::before {
+            content: ""; position: absolute; height: 22px; width: 22px;
+            left: 4px; top: 4px; background: #fff; border-radius: 50%;
+            transition: 0.25s; box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+        }
+        .switch input:checked + .slider { background: #4f46e5; }
+        .switch input:checked + .slider::before { transform: translateX(22px); }
+        .switch input:focus-visible + .slider { outline: 3px solid #a5b4fc; }
+
+        /* forms */
+        .field { margin-bottom: 14px; }
+        .field label {
+            display: block; font-size: 13px; font-weight: 600;
+            color: #475569; margin-bottom: 6px;
+        }
+        .field input[type="text"],
+        .field input[type="password"],
+        .field input[type="file"] {
+            width: 100%; padding: 11px 13px; font-size: 15px;
+            border: 1px solid #d5dbee; border-radius: 12px;
+            background: #f8faff; color: #172033; outline: none;
+        }
+        .field input:focus { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,0.18); }
+        .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+        .s-btn {
+            border: none; cursor: pointer; font-size: 14.5px; font-weight: 600;
+            padding: 11px 20px; border-radius: 12px; transition: all 0.2s ease;
+        }
+        .s-btn.primary { background: linear-gradient(135deg, #4f46e5, #7c3aed); color: #fff; }
+        .s-btn.primary:hover { transform: translateY(-1px); box-shadow: 0 8px 18px rgba(79,70,229,0.3); }
+        .s-btn.secondary { background: #eef2ff; color: #4338ca; }
+        .s-btn.secondary:hover { background: #e0e7ff; }
+        .s-btn.danger { background: #fee2e2; color: #b91c1c; }
+        .s-btn.danger:hover { background: #fecaca; }
+        .btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+
+        .s-msg {
+            display: none; margin-top: 14px; padding: 11px 14px;
+            border-radius: 12px; font-size: 14px; line-height: 1.45;
+        }
+        .s-msg.show { display: block; }
+        .s-msg.ok  { background: #dcfce7; color: #166534; }
+        .s-msg.err { background: #fee2e2; color: #991b1b; }
+
+        /* about */
+        .about-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 4px; }
+        .about-item {
+            background: #f5f7ff; border-radius: 14px; padding: 16px; text-align: center;
+        }
+        .about-item b { display: block; font-size: 24px; color: #4338ca; }
+        .about-item span { font-size: 12.5px; color: #64748b; }
+        .about-list { list-style: none; padding: 0; margin: 0; }
+        .about-list li {
+            display: flex; justify-content: space-between; gap: 12px;
+            padding: 10px 0; border-bottom: 1px solid #eef0f8; font-size: 14.5px; color: #334155;
+        }
+        .about-list li:last-child { border-bottom: none; }
+        .about-list li span:first-child { color: #64748b; }
+
+        /* dark mode */
+        body.dark .settings-tab { background: #1e293b; border-color: #334155; color: #c7d2fe; }
+        body.dark .settings-tab:hover { background: #273449; }
+        body.dark .settings-tab.active { color: #fff; border-color: transparent; }
+        body.dark .settings-card { background: #1e293b; border-color: #334155; box-shadow: none; }
+        body.dark .settings-card h3,
+        body.dark .settings-row strong { color: #f1f5f9; }
+        body.dark .settings-card .hint,
+        body.dark .settings-row small,
+        body.dark .field label,
+        body.dark .about-list li span:first-child { color: #94a3b8; }
+        body.dark .field input[type="text"],
+        body.dark .field input[type="password"],
+        body.dark .field input[type="file"] { background: #0f172a; border-color: #334155; color: #e5e7eb; }
+        body.dark .slider { background: #475569; }
+        body.dark .s-btn.secondary { background: #312e81; color: #e0e7ff; }
+        body.dark .s-btn.danger { background: #7f1d1d; color: #fee2e2; }
+        body.dark .s-msg.ok  { background: #14532d; color: #bbf7d0; }
+        body.dark .s-msg.err { background: #7f1d1d; color: #fecaca; }
+        body.dark .about-item { background: #0f172a; }
+        body.dark .about-item b { color: #a5b4fc; }
+        body.dark .about-list li { border-color: #334155; color: #e2e8f0; }
+
+        @media (max-width: 600px) {
+            .field-grid { grid-template-columns: 1fr; }
+            .about-grid { grid-template-columns: 1fr; }
+            .settings-row { align-items: flex-start; }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+        <div class="logo-icon">🎓</div>
+
+        <div>
+            <h2>KJIT</h2>
+            <span>CAMPUS</span>
+        </div>
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <a href="index.html" class="nav-item">
+            <span>🏠</span>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="index.html" class="nav-item">
+            <span>📋</span>
+            <span>Attendance</span>
+        </a>
+
+        <a href="students.html" class="nav-item">
+            <span>👨‍🎓</span>
+            <span>Students</span>
+        </a>
+
+        <a href="report.html" class="nav-item">
+            <span>📊</span>
+            <span>Reports</span>
+        </a>
+
+        <div class="nav-section-title">
+            MANAGEMENT
+        </div>
+
+        <a href="students.html" class="nav-item">
+            <span>⚡</span>
+            <span>Quick Actions</span>
+        </a>
+
+        <a href="settings.html" class="nav-item active">
+            <span>⚙️</span>
+            <span>Settings</span>
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+            <a href="#" class="nav-item" onclick="kjitLogout(event)">
+                <span>🚪</span>
+                <span>Logout</span>
+            </a>
+
+            
+
+        <div class="admin-card">
+
+            <div class="admin-avatar">
+                A
+            </div>
+
+            <div>
+                <strong>Admin</strong>
+                <small>Administrator</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- HEADER -->
+<header class="topbar">
+
+    <div class="mobile-menu" onclick="toggleSidebar()">
+        ☰
+    </div>
+
+    <div class="page-brand">
+        <span>Settings</span>
+    </div>
+
+
+    <div class="topbar-actions">
+
+        <button
+            id="themeButton"
+            class="icon-button"
+            title="Toggle Dark Mode"
+        >
+            🌙
+        </button>
+
+        <div class="profile">
+
+            <div class="profile-avatar">
+                A
+            </div>
+
+            <div class="profile-info">
+                <strong>Admin</strong>
+                <small>College Admin</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+        <!-- PAGE TITLE -->
+        <section class="page-heading">
+            <div>
+                <h2>SETTINGS</h2>
+                <p>Manage appearance, your account and your data</p>
+            </div>
+            <div class="college-badge">
+                🎓 KJIT CAMPUS
+            </div>
+        </section>
+
+        <div class="settings-wrap">
+
+            <!-- TABS -->
+            <div class="settings-tabs" role="tablist">
+                <button class="settings-tab active" data-tab="appearance" role="tab">🎨 Appearance</button>
+                <button class="settings-tab" data-tab="account" role="tab">👤 Account</button>
+                <button class="settings-tab" data-tab="data" role="tab">💾 Data &amp; Backup</button>
+                <button class="settings-tab" data-tab="about" role="tab">ℹ️ About</button>
+            </div>
+
+
+            <!-- ========== APPEARANCE ========== -->
+            <section class="settings-panel active" id="tab-appearance">
+
+                <div class="settings-card">
+                    <h3>Theme</h3>
+                    <p class="hint">Choose how the app looks. Your choice is remembered on this device.</p>
+
+                    <div class="settings-row">
+                        <div>
+                            <strong>Dark mode</strong>
+                            <small>Easier on the eyes in low light</small>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="darkToggle" aria-label="Dark mode">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- ========== ACCOUNT ========== -->
+            <section class="settings-panel" id="tab-account">
+
+                <div class="settings-card">
+                    <h3>Login details</h3>
+                    <p class="hint">
+                        Signed in as <strong id="currentUser">admin</strong>.
+                        Change the username or password used on the login page.
+                        This applies to this browser only.
+                    </p>
+
+                    <div class="field">
+                        <label for="curPass">Current password</label>
+                        <input type="password" id="curPass" autocomplete="current-password">
+                    </div>
+
+                    <div class="field">
+                        <label for="newUser">New username</label>
+                        <input type="text" id="newUser" autocomplete="username">
+                    </div>
+
+                    <div class="field-grid">
+                        <div class="field">
+                            <label for="newPass">New password</label>
+                            <input type="password" id="newPass" autocomplete="new-password">
+                        </div>
+                        <div class="field">
+                            <label for="newPass2">Confirm new password</label>
+                            <input type="password" id="newPass2" autocomplete="new-password">
+                        </div>
+                    </div>
+
+                    <div class="btn-row">
+                        <button class="s-btn primary" id="saveLogin">Save login details</button>
+                        <button class="s-btn secondary" id="resetLogin">Reset to default</button>
+                    </div>
+
+                    <div class="s-msg" id="accountMsg" role="status"></div>
+                </div>
+
+                <div class="settings-card">
+                    <h3>Session</h3>
+                    <p class="hint">Sign out of this browser tab.</p>
+                    <button class="s-btn secondary" onclick="kjitLogout(event)">🚪 Log out</button>
+                </div>
+
+            </section>
+
+
+            <!-- ========== DATA ========== -->
+            <section class="settings-panel" id="tab-data">
+
+                <div class="settings-card">
+                    <h3>Download a backup</h3>
+                    <p class="hint">
+                        Attendance and student data is stored only in this browser.
+                        Download a backup file regularly so you never lose it.
+                        Login details are not included.
+                    </p>
+                    <button class="s-btn primary" id="backupBtn">⬇️ Download backup</button>
+                </div>
+
+                <div class="settings-card">
+                    <h3>Restore from a backup</h3>
+                    <p class="hint">Choose a backup file you downloaded earlier. This replaces the data currently on this device.</p>
+                    <div class="field">
+                        <input type="file" id="restoreFile" accept=".json,application/json" aria-label="Backup file">
+                    </div>
+                    <button class="s-btn secondary" id="restoreBtn">⬆️ Restore backup</button>
+                </div>
+
+                <div class="settings-card">
+                    <h3>Danger zone</h3>
+                    <p class="hint">Permanently delete every attendance record. Your student list is kept. Download a backup first if unsure.</p>
+                    <button class="s-btn danger" id="clearBtn">🗑️ Clear all attendance records</button>
+                </div>
+
+                <div class="s-msg" id="dataMsg" role="status"></div>
+
+            </section>
+
+
+            <!-- ========== ABOUT ========== -->
+            <section class="settings-panel" id="tab-about">
+
+                <div class="settings-card">
+                    <h3>Your data at a glance</h3>
+                    <p class="hint">Stored in this browser on this device.</p>
+                    <div class="about-grid">
+                        <div class="about-item"><b id="aboutStudents">-</b><span>Students</span></div>
+                        <div class="about-item"><b id="aboutDays">-</b><span>Days recorded</span></div>
+                        <div class="about-item"><b id="aboutSize">-</b><span>Storage used</span></div>
+                    </div>
+                </div>
+
+                <div class="settings-card">
+                    <h3>About this app</h3>
+                    <ul class="about-list">
+                        <li><span>Name</span><span>KJIT Campus Attendance System</span></li>
+                        <li><span>Version</span><span>1.0</span></li>
+                        <li><span>Storage</span><span>Browser (localStorage)</span></li>
+                        <li><span>Works offline</span><span id="aboutOffline">-</span></li>
+                    </ul>
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="settings.js"></script>
+</body>
+</html>
